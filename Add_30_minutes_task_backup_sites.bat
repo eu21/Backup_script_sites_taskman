@@ -29,6 +29,8 @@ exit /b
 :: Get the script directory
 set "currentDir=%~dp0"
 
+cd %currentDir%
+
 :: Create the scheduled task
 schtasks /create /tn "Backup_script_SITES" /tr "\"%currentDir%Backup_script_SITES.bat\"" /sc minute /mo 30 /ru System
 

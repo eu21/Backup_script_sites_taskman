@@ -1,9 +1,30 @@
 ﻿@echo off
 setlocal enabledelayedexpansion
 
+
 set "source=c:\MAMP\htdocs\"
-set "destination=c:\backup\sites\taskman"
+set "destination=c:\backup\sites"
 set "delete_after_days=30"
+
+mkdir %destination%
+
+:: Check if the script is running as administrator
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    goto :runScript
+) else (
+    echo Requesting administrative privileges...
+    goto :getAdmin
+)
+
+:getAdmin
+:: Request administrative privileges
+echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+"%temp%\getadmin.vbs"
+exit /b
+
+:runScript
 
 for /d %%a in ("%source%*") do (
     set "folder=%%~na"
