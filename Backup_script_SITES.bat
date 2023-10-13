@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 
 set "source=c:\MAMP\htdocs\"
-set "destination=c:\backup\sites"
+set "destination=c:\backup\sites\"
 set "delete_after_days=30"
 
 mkdir %destination%
